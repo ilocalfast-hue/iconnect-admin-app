@@ -1,40 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+
+# Next.js & Firebase Project
+
+This is a Next.js project integrated with Firebase, featuring Cloud Functions and Firebase Hosting. This guide provides all the necessary instructions to set up, run, and deploy this application.
+
+## Project Structure
+
+The project is organized as follows:
+
+```
+/
+|-- app/                # Next.js App Router directory
+|   |-- (admin)/        # Admin-only routes
+|   |   |-- admin/
+|   |   |   |-- requests/ # Job approval requests
+|   |   |   |-- credits/  # User credit management
+|   |   |   `-- settings/ # Admin settings
+|   |-- layout.tsx      # Root layout
+|   `-- page.tsx        # Home page
+|
+|-- functions/          # Firebase Cloud Functions
+|   |-- src/
+|   |   `-- index.ts    # Main functions file
+|   `-- package.json
+|
+|-- scripts/            # Helper scripts
+|   `-- setAdmin.js     # Script to assign admin custom claims
+|
+|-- firebase.json       # Firebase project configuration
+|-- .firebaserc       # Firebase project alias configuration
+|-- next.config.js      # Next.js configuration
+|-- package.json        # Project dependencies
+`-- tsconfig.json       # TypeScript configuration
+
+```
 
 ## Getting Started
 
-First, run the development server:
+### 1. Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or later recommended)
+- [Firebase CLI](https://firebase.google.com/docs/cli)
+- A Firebase project
+
+### 2. Installation
+
+Clone the repository and install the dependencies for both the Next.js app and the Cloud Functions:
+
+```bash
+# Install root dependencies
+npm install
+
+# Install function dependencies
+cd functions
+npm install
+cd ..
+```
+
+### 3. Environment Configuration
+
+Create a `.env.local` file in the root of the project and add your Firebase project's web app configuration:
+
+```
+NEXT_PUBLIC_FIREBASE_API_KEY="..."
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="..."
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="..."
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="..."
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="..."
+NEXT_PUBLIC_FIREBASE_APP_ID="..."
+```
+
+### 4. Setting Up an Admin User
+
+To access the admin dashboard, you need to assign a custom `admin` claim to a user.
+
+1.  **Create a Service Account:**
+    - Go to your Firebase Project Settings > Service Accounts.
+    - Click **Generate new private key** and save the JSON file.
+    - **IMPORTANT:** Move this file to a secure location outside your project's source code (e.g., in a parent directory).
+
+2.  **Run the `setAdmin.js` Script:**
+    - Open `scripts/setAdmin.js`.
+    - Update the `serviceAccount` path to point to your downloaded service account key.
+    - Update `userEmail` with the email of the user you want to make an admin.
+    - Run the script:
+
+    ```bash
+    node scripts/setAdmin.js
+    ```
+
+## Local Development with Emulators
+
+To develop and test locally, use the Firebase Emulators.
+
+### 1. Initialize Emulators
+
+If you haven't already, initialize the emulators you need:
+
+```bash
+firebase init emulators
+```
+
+Select **Authentication**, **Functions**, and **Firestore**.
+
+### 2. Start the Emulators and Dev Server
+
+In one terminal, start the Firebase Emulators:
+
+```bash
+firebase emulators:start
+```
+
+In another terminal, start the Next.js development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Your app will be running at `http://localhost:3000` and the Emulator UI at `http://localhost:4000`.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### 1. Deploying Cloud Functions
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+To deploy only the Cloud Functions:
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+firebase deploy --only functions
+```
 
-## Learn More
+### 2. Deploying to Firebase Hosting
 
-To learn more about Next.js, take a look at the following resources:
+To deploy the Next.js application to Firebase Hosting:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```bash
+firebase deploy --only hosting
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Full Deployment
 
-## Deploy on Vercel
+To deploy all services (Functions, Hosting, and Firestore rules):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+firebase deploy
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+After deployment, your Next.js application will be live on the Firebase Hosting URL provided in the CLI output.
+
