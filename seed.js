@@ -1,36 +1,29 @@
 
-const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, addDoc } = require('firebase/firestore');
+const admin = require('firebase-admin');
+const serviceAccount = require('./iConnect-2068e-firebase-adminsdk-fbsvc-2c7acb8afa.json');
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const db = admin.firestore();
+
+const users = [
+  { name: 'John Doe', email: 'john.doe@example.com', role: 'Admin' },
+  { name: 'Jane Smith', email: 'jane.smith@example.com', role: 'User' },
+  { name: 'Peter Jones', email: 'peter.jones@example.com', role: 'User' },
+];
+
+const seedUsers = async () => {
+  const usersCollection = db.collection('users');
+  for (const user of users) {
+    await usersCollection.add(user);
+  }
+  console.log('Users seeded successfully');
+  process.exit(0);
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-const seedRequests = async () => {
-    const requestsCollection = collection(db, 'requests');
-  
-    const requests = [
-      { name: 'John Doe', email: 'john.doe@example.com', request: 'I need help with my account.', status: 'Pending' },
-      { name: 'Jane Smith', email: 'jane.smith@example.com', request: 'I want to upgrade my subscription.', status: 'Pending' },
-      { name: 'Peter Jones', email: 'peter.jones@example.com', request: 'I have a billing question.', status: 'Completed' },
-    ];
-  
-    for (const request of requests) {
-      await addDoc(requestsCollection, request);
-    }
-  };
-
-  seedRequests().then(() => {
-      console.log('database seeded');
-      process.exit(0)
-  });
+seedUsers().catch(error => {
+  console.error('Error seeding users:', error);
+  process.exit(1);
+});
