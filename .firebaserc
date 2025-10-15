@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "default": "gaupro-2068e"
+  },
   "targets": {},
   "etags": {}
 }
