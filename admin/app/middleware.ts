@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/lib/firebase-admin'; // Corrected import path
+import { auth } from '../lib/firebase-admin'; // Corrected import path
 
 export async function middleware(request: NextRequest) {
   const idToken = request.cookies.get('idToken')?.value;
@@ -20,8 +20,11 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(homeUrl);
     }
 
-    // If the user is an admin and tries to access a non-admin page, you might want to redirect them to admin
-    // Or just let them proceed. For now, we'll just protect the /admin routes.
+    if (request.nextUrl.pathname === '/admin') {
+      const usersUrl = new URL('/admin/users', request.url);
+      return NextResponse.redirect(usersUrl);
+    }
+
     return NextResponse.next();
   } catch (error) {
     // If token is invalid, redirect to login

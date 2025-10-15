@@ -7,7 +7,7 @@ const db = admin.firestore();
 
 export const adminApproveRequest = functions.https.onCall(async (data, context) => {
   // Check for admin custom claim
-  if (!context.auth?.token.admin) {
+  if (!context || !context.auth || !context.auth.token || !context.auth.token.admin) {
     throw new functions.https.HttpsError(
       "permission-denied",
       "Must be an administrative user to approve requests."
@@ -39,7 +39,7 @@ export const adminApproveRequest = functions.https.onCall(async (data, context) 
 
 export const adminRejectRequest = functions.https.onCall(async (data, context) => {
     // Check for admin custom claim
-    if (!context.auth?.token.admin) {
+    if (!context || !context.auth || !context.auth.token || !context.auth.token.admin) {
         throw new functions.https.HttpsError(
             "permission-denied",
             "Must be an administrative user to reject requests."
@@ -71,7 +71,7 @@ export const adminRejectRequest = functions.https.onCall(async (data, context) =
 
 export const adminAdjustCredits = functions.https.onCall(async (data, context) => {
     // Check for admin custom claim
-    if (!context.auth?.token.admin) {
+    if (!context || !context.auth || !context.auth.token || !context.auth.token.admin) {
         throw new functions.https.HttpsError(
             "permission-denied",
             "Must be an administrative user to adjust credits."
@@ -111,7 +111,7 @@ export const adminAdjustCredits = functions.https.onCall(async (data, context) =
 });
 
 export const purchaseLead = functions.https.onCall(async (data, context) => {
-    if (!context.auth) {
+    if (!context || !context.auth) {
         throw new functions.https.HttpsError(
             "unauthenticated",
             "You must be logged in to purchase a lead."
@@ -149,7 +149,7 @@ export const purchaseLead = functions.https.onCall(async (data, context) => {
         throw new functions.https.HttpsError("failed-precondition", "Insufficient credits.");
     }
     
-    const newCredits = userCredits - leadCost;
+    const newCredits = userCredits - lead.cost
     
     await userRef.update({ credits: newCredits });
     
