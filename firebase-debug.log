@@ -192,3 +192,79 @@
 [error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
 [debug] [2025-10-15T19:34:20.559Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
 [debug] [2025-10-15T19:34:20.559Z] > authorizing via signed-in user (ilocalfast@gmail.com)
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-10-15T20:08:44.125Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.126Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.128Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.128Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.129Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.129Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.130Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.130Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.131Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.131Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.133Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/ [none]
+[debug] [2025-10-15T20:08:44.133Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/ x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.189Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasedataconnect.googleapis.com [none]
+[debug] [2025-10-15T20:08:44.190Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.195Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2025-10-15T20:08:44.195Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.197Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseapphosting.googleapis.com [none]
+[debug] [2025-10-15T20:08:44.198Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.200Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseio.com [none]
+[debug] [2025-10-15T20:08:44.200Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseio.com x-goog-quota-user=projects/gaupro-2068e
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-10-15T20:08:44.302Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.302Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.303Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.304Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.307Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.307Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.307Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.307Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.308Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.311Z] Checked if tokens are valid: true, expires at: 1760560005286
+[debug] [2025-10-15T20:08:44.312Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/ [none]
+[debug] [2025-10-15T20:08:44.312Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/ x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.319Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasedataconnect.googleapis.com [none]
+[debug] [2025-10-15T20:08:44.319Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.322Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasecrashlytics.googleapis.com [none]
+[debug] [2025-10-15T20:08:44.322Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasecrashlytics.googleapis.com x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.324Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseapphosting.googleapis.com [none]
+[debug] [2025-10-15T20:08:44.324Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseapphosting.googleapis.com x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.327Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseio.com [none]
+[debug] [2025-10-15T20:08:44.327Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseio.com x-goog-quota-user=projects/gaupro-2068e
+[debug] [2025-10-15T20:08:44.653Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseapphosting.googleapis.com 200
+[debug] [2025-10-15T20:08:44.654Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2025-10-15T20:08:44.913Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseio.com 403
+[debug] [2025-10-15T20:08:44.913Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseio.com [omitted]
+[debug] [2025-10-15T20:08:44.995Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseio.com 403
+[debug] [2025-10-15T20:08:44.995Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseio.com [omitted]
+[debug] [2025-10-15T20:08:45.024Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasedataconnect.googleapis.com 200
+[debug] [2025-10-15T20:08:45.025Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2025-10-15T20:08:45.031Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseapphosting.googleapis.com 200
+[debug] [2025-10-15T20:08:45.031Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebaseapphosting.googleapis.com [omitted]
+[debug] [2025-10-15T20:08:45.035Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasecrashlytics.googleapis.com 200
+[debug] [2025-10-15T20:08:45.036Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2025-10-15T20:08:45.063Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasecrashlytics.googleapis.com 200
+[debug] [2025-10-15T20:08:45.068Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasecrashlytics.googleapis.com [omitted]
+[debug] [2025-10-15T20:08:45.080Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasedataconnect.googleapis.com 200
+[debug] [2025-10-15T20:08:45.083Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/firebasedataconnect.googleapis.com [omitted]
+[debug] [2025-10-15T20:08:45.184Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/ 200
+[debug] [2025-10-15T20:08:45.188Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/ [omitted]
+[debug] [2025-10-15T20:08:45.245Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/ 200
+[debug] [2025-10-15T20:08:45.252Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/gaupro-2068e/services/ [omitted]
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-10-15T20:08:45.261Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-10-15T20:08:45.262Z] > authorizing via signed-in user (ilocalfast@gmail.com)
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-10-15T20:08:45.294Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-10-15T20:08:45.294Z] > authorizing via signed-in user (ilocalfast@gmail.com)
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[error] Failed to fetch Firebase Project from Studio Workspace because WORKSPACE_SLUG environment variable is empty
+[debug] [2025-10-15T20:08:45.308Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-10-15T20:08:45.308Z] > authorizing via signed-in user (ilocalfast@gmail.com)
