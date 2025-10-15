@@ -7,9 +7,10 @@ const AdminNav = () => {
   const pathname = usePathname();
 
   const navItems = [
-    { href: '/admin', label: 'Dashboard' },
     { href: '/admin/users', label: 'Users' },
-    { href: '/admin/requests', label: 'Requests' },
+    { href: '/admin/services', label: 'Services' },
+    { href: '/admin/leads', label: 'Leads' },
+    { href: '/admin/jobs', label: 'Jobs' },
     { href: '/admin/credits', label: 'Credits' },
     { href: '/admin/settings', label: 'Settings' },
   ];

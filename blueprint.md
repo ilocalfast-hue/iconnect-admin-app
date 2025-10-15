@@ -3,7 +3,7 @@
 
 ## Overview
 
-A web application that allows users to sign up, log in, and view a dashboard. Administrators have access to a separate admin dashboard.
+A web application that allows users to sign up, log in, and view a dashboard. Administrators have access to a separate admin dashboard for managing users, services, leads, jobs, and a credit system.
 
 ## Implemented Features
 
@@ -12,17 +12,17 @@ A web application that allows users to sign up, log in, and view a dashboard. Ad
     *   Login page (`/login`) that allows users to sign in.
 *   **Routing:**
     *   Home page (`/`) for authenticated non-admin users.
-    *   Admin requests page (`/admin/requests`) for authenticated admin users.
+    *   Admin users page (`/admin/users`) for authenticated admin users.
     *   Admin credits page (`/admin/credits`) for authenticated admin users.
     *   Admin settings page (`/admin/settings`) for authenticated admin users.
-    *   Redirects to the admin dashboard (`/admin/requests`) for admin users upon login.
+    *   Redirects to the admin dashboard (`/admin/users`) for admin users upon login.
     *   Redirects to the homepage (`/`) for non-admin users upon login.
 *   **Firebase Integration:**
     *   `firebase` npm package has been installed.
     *   The application is set up to use Firebase Authentication.
 *   **Admin Panel:**
     *   Created an admin panel at `/admin` with a modern UI.
-    *   Added navigation for `requests`, `credits`, and `settings`.
+    *   Added navigation for `users`, `credits`, and `settings`.
     *   Included a `Header` component with user display name and a logout button.
 *   **Styling:**
     *   Used Tailwind CSS for styling.
@@ -36,4 +36,12 @@ A web application that allows users to sign up, log in, and view a dashboard. Ad
 
 ## Current Plan
 
-The application now has a functional admin panel. The next steps will involve implementing the features within each section of the admin panel, such as managing user requests, credits, and application settings.
+The current focus is on building out the core sections of the admin panel. The following sections will be created:
+
+1.  **Users:** Manage users.
+2.  **Services:** Manage services.
+3.  **Leads:** Manage leads.
+4.  **Jobs:** Manage jobs.
+5.  **Credits:** Manage the credit system.
+
+The existing `/admin/requests` page will be renamed to `/admin/users`. New pages will be created for `services`, `leads`, and `jobs`. The navigation will be updated to reflect these changes.
