@@ -1,6 +1,10 @@
 'use client';
 
-import { useFormState } from 'react-dom';
+// REMOVE this line:
+// import { useFormState } from 'react-dom';
+// ADD or ensure this line is present:
+import { useActionState } from 'react';
+
 import { saveServiceRequest } from './actions';
 
 const initialState = {
@@ -8,7 +12,8 @@ const initialState = {
 };
 
 export default function ServiceRequestForm() {
-  const [state, formAction] = useFormState(saveServiceRequest, initialState);
+  // CHANGE this line to use useActionState:
+  const [state, formAction] = useActionState(saveServiceRequest, initialState);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
