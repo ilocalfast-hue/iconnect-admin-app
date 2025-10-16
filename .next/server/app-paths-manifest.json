@@ -2,6 +2,7 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/admin/jobs/page": "app/admin/jobs/page.js",
   "/admin/login/page": "app/admin/login/page.js",
+  "/admin/providers/page": "app/admin/providers/page.js",
   "/admin/requests/page": "app/admin/requests/page.js",
   "/admin/services/page": "app/admin/services/page.js",
   "/admin/users/page": "app/admin/users/page.js",
