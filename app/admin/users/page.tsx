@@ -168,8 +168,8 @@ export default function UsersPage() {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{user.email}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{user.phone}</td>
                                     <td className="px-6 py-4 whitespace-nowrap"><StatusBadge status={user.status} onStatusChange={(newStatus) => handleStatusChange(user.id, newStatus)} /></td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{new Date((user.lastLogin as any).seconds * 1000).toLocaleString()}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{new Date((user.createdAt as any).seconds * 1000).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{(user.lastLogin && user.lastLogin.seconds) ? new Date(user.lastLogin.seconds * 1000).toLocaleString() : 'N/A'}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{(user.createdAt && user.createdAt.seconds) ? new Date(user.createdAt.seconds * 1000).toLocaleDateString() : 'N/A'}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div className="flex items-center space-x-3">
                                             <button className="text-blue-600 hover:text-blue-900"><PencilIcon className="h-5 w-5" /></button>

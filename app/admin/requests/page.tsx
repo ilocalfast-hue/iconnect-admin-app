@@ -1,8 +1,8 @@
 'use client'
 import React, { useState, useMemo, useEffect } from "react"
-import { CheckIcon, XMarkIcon, ChevronUpIcon, ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid"
+import { CheckIcon, XMarkIcon, ChevronUpIcon, ChevronDownIcon, MagnifyingGlassIcon, ArchiveBoxXMarkIcon } from "@heroicons/react/24/solid"
 import { firestore } from "../../firebase/client";
-import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, updateDoc, getDocs, query, where } from "firebase/firestore";
 
 // --- TYPES ---
 
@@ -13,8 +13,9 @@ type ServiceRequest = {
     phone: string;
     date: string;
     service: string;
-    status: 'Pending' | 'Approved' | 'Rejected';
+    status: 'Pending' | 'Approved' | 'Rejected' | 'Closed';
     createdAt: any; // Firestore timestamp
+    providerResponses: number;
 };
 
 // --- HELPER COMPONENTS ---
@@ -24,6 +25,7 @@ const StatusBadge = ({ status }: { status: ServiceRequest['status'] }) => {
         Pending: 'bg-yellow-100 text-yellow-800',
         Approved: 'bg-green-100 text-green-800',
         Rejected: 'bg-red-100 text-red-800',
+        Closed: 'bg-gray-100 text-gray-800',
     };
     return <span className={`px-2 py-1 rounded-full text-xs font-medium ${styles[status]}`}>{status}</span>;
 };
@@ -39,8 +41,16 @@ export default function RequestsPage() {
         const unsubscribe = onSnapshot(collection(firestore, "serviceRequests"), (snapshot) => {
             const newRequests = snapshot.docs.map(doc => ({
                 id: doc.id,
-                ...doc.data()
+                ...doc.data(),
+                providerResponses: doc.data().providerResponses || 0, // Default to 0 if not present
             } as ServiceRequest));
+
+            newRequests.forEach(request => {
+                if (request.providerResponses >= 5 && request.status !== 'Closed') {
+                    handleStatusChange(request.id, 'Closed');
+                }
+            });
+
             setRequests(newRequests);
         });
 
@@ -86,26 +96,30 @@ export default function RequestsPage() {
         { key: 'name', label: 'Customer Name', sortable: true },
         { key: 'email', label: 'Email' },
         { key: 'phone', label: 'Phone' },
-        { key: 'date', label: 'Preferred Date', sortable: true },
         { key: 'service', label: 'Service Request' },
         { key: 'status', label: 'Status', sortable: true },
+        { key: 'providerResponses', label: 'Responses', sortable: true },
         { key: 'createdAt', label: 'Received', sortable: true },
         { key: 'actions', label: 'Actions' }
     ];
 
     const renderCell = (request: ServiceRequest, key: string) => {
         const cellValue = request[key as keyof ServiceRequest];
+        const isClosed = request.status === 'Closed' || request.status === 'Approved' || request.status === 'Rejected';
 
         switch (key) {
             case 'status':
                 return <StatusBadge status={cellValue as ServiceRequest['status']} />;
             case 'createdAt':
                 return <span className="text-sm text-gray-600">{new Date((cellValue as any).seconds * 1000).toLocaleString()}</span>;
+            case 'providerResponses':
+                 return <span className="text-sm text-gray-600">{request.providerResponses}</span>;
              case 'actions':
                 return (
                     <div className="flex items-center space-x-2">
-                        <button onClick={() => handleStatusChange(request.id, 'Approved')} className="p-2 text-green-600 hover:bg-green-100 rounded-full transition-colors"><CheckIcon className="h-5 w-5" /></button>
-                        <button onClick={() => handleStatusChange(request.id, 'Rejected')} className="p-2 text-red-600 hover:bg-red-100 rounded-full transition-colors"><XMarkIcon className="h-5 w-5" /></button>
+                        <button onClick={() => handleStatusChange(request.id, 'Approved')} disabled={isClosed} className={`p-2 text-green-600 rounded-full transition-colors ${isClosed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-100'}`}><CheckIcon className="h-5 w-5" /></button>
+                        <button onClick={() => handleStatusChange(request.id, 'Rejected')} disabled={isClosed} className={`p-2 text-red-600 rounded-full transition-colors ${isClosed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-red-100'}`}><XMarkIcon className="h-5 w-5" /></button>
+                        <button onClick={() => handleStatusChange(request.id, 'Closed')} disabled={isClosed} className={`p-2 text-gray-600 rounded-full transition-colors ${isClosed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'}`}><ArchiveBoxXMarkIcon className="h-5 w-5" /></button>
                     </div>
                 );
             default:

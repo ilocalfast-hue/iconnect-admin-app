@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///home/user/iconnect/app/admin/jobs/page.tsx"],"sourcesContent":["\"use client\"\nimport React from \"react\"\n\nexport default function JobsPage() {\n  return (\n    <div className=\"container mx-auto px-4 py-8\">\n      <h1 className=\"text-4xl font-bold mb-8 text-gray-800\">Jobs Management</h1>\n      <p className=\"text-lg text-gray-600\">This is where you can manage all the jobs.</p>\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;AAAA;;AAGe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;;0BACb,8OAAC;gBAAG,WAAU;0BAAwC;;;;;;0BACtD,8OAAC;gBAAE,WAAU;0BAAwB;;;;;;;;;;;;AAG3C","debugId":null}}]
+}

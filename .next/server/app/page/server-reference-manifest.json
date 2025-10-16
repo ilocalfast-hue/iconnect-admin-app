@@ -1,0 +1,20 @@
+{
+  "node": {
+    "609be40870f4f7e564cedf5339d4b4dbd6b151e24b": {
+      "workers": {
+        "app/page": {
+          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "saveServiceRequest",
+          "filename": "app/actions.ts"
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      },
+      "exportedName": "saveServiceRequest",
+      "filename": "app/actions.ts"
+    }
+  },
+  "edge": {}
+}

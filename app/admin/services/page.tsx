@@ -124,7 +124,7 @@ export default function ServicesPage() {
         case 'featured':
             return <div className="flex justify-center"><button onClick={() => handleFeatureChange(service.id, !service.featured)}>{cellValue ? <StarIconSolid className="h-5 w-5 text-yellow-500" /> : <StarIconOutline className="h-5 w-5 text-gray-300" />}</button></div>;
         case 'createdAt':
-            return <span className="text-sm text-gray-600">{new Date((cellValue as any).seconds * 1000).toLocaleDateString()}</span>;
+            return <span className="text-sm text-gray-600">{(cellValue && cellValue.seconds) ? new Date(cellValue.seconds * 1000).toLocaleDateString() : 'N/A'}</span>;
         case 'actions':
             return (
                 <div className="flex items-center space-x-3">

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 11, "column": 0}, "map": {"version":3,"sources":["file:///home/user/iconnect/app/page.tsx"],"sourcesContent":["\nconst Home = () => {\n  return (\n    <div>\n      <h1>Home</h1>\n      <p>This is the home page.</p>\n    </div>\n  );\n};\n\nexport default Home;\n"],"names":[],"mappings":";;;;;;AACA,MAAM,OAAO;IACX,qBACE,8OAAC;;0BACC,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;0BAAE;;;;;;;;;;;;AAGT;uCAEe","debugId":null}}]
+}

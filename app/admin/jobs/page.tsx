@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect } from "react"
 import { PlusIcon, PencilIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import { firestore } from "../../firebase/client";
-import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc } from "firebase/firestore";
 
 // --- TYPES ---
 
@@ -12,68 +12,9 @@ type Job = {
     customerName: string;
     providerName: string;
     scheduledTime: any; // Firestore timestamp
-    status: 'Scheduled' | 'In Progress' | 'Completed' | 'Cancelled';
-    cost: number;
-    paymentStatus: 'Paid' | 'Unpaid';
+    review: string;
     createdAt: any; // Firestore timestamp
 };
-
-// --- HELPER COMPONENTS ---
-
-const JobStatusBadge = ({ status, onStatusChange }: { status: Job['status'], onStatusChange: (newStatus: Job['status']) => void }) => {
-    const styles = {
-        Scheduled: 'bg-blue-100 text-blue-800',
-        'In Progress': 'bg-yellow-100 text-yellow-800',
-        Completed: 'bg-green-100 text-green-800',
-        Cancelled: 'bg-gray-100 text-gray-800',
-    };
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleStatusSelect = (newStatus: Job['status']) => {
-        onStatusChange(newStatus);
-        setIsOpen(false);
-    }
-
-    return (
-        <div className="relative">
-            <button onClick={() => setIsOpen(!isOpen)} className={`px-2 py-1 rounded-full text-xs font-medium ${styles[status]}`}>{status}</button>
-            {isOpen && (
-                <div className="absolute z-10 mt-2 w-32 bg-white rounded-md shadow-lg">
-                    <button onClick={() => handleStatusSelect('Scheduled')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Scheduled</button>
-                    <button onClick={() => handleStatusSelect('In Progress')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">In Progress</button>
-                    <button onClick={() => handleStatusSelect('Completed')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Completed</button>
-                    <button onClick={() => handleStatusSelect('Cancelled')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cancelled</button>
-                </div>
-            )}
-        </div>
-    );
-};
-
-const PaymentStatusBadge = ({ status, onStatusChange }: { status: Job['paymentStatus'], onStatusChange: (newStatus: Job['paymentStatus']) => void }) => {
-    const styles = {
-        Paid: 'bg-green-100 text-green-800',
-        Unpaid: 'bg-red-100 text-red-800',
-    };
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleStatusSelect = (newStatus: Job['paymentStatus']) => {
-        onStatusChange(newStatus);
-        setIsOpen(false);
-    }
-
-    return (
-        <div className="relative">
-            <button onClick={() => setIsOpen(!isOpen)} className={`px-2 py-1 rounded-full text-xs font-medium ${styles[status]}`}>{status}</button>
-            {isOpen && (
-                <div className="absolute z-10 mt-2 w-32 bg-white rounded-md shadow-lg">
-                    <button onClick={() => handleStatusSelect('Paid')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Paid</button>
-                    <button onClick={() => handleStatusSelect('Unpaid')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Unpaid</button>
-                </div>
-            )}
-        </div>
-    );
-};
-
 
 // --- MAIN PAGE COMPONENT ---
 
@@ -93,16 +34,6 @@ export default function JobsPage() {
 
         return () => unsubscribe();
     }, []);
-
-    const handleStatusChange = async (jobId: string, newStatus: Job['status']) => {
-        const jobRef = doc(firestore, "jobs", jobId);
-        await updateDoc(jobRef, { status: newStatus });
-    };
-
-    const handlePaymentStatusChange = async (jobId: string, newStatus: Job['paymentStatus']) => {
-        const jobRef = doc(firestore, "jobs", jobId);
-        await updateDoc(jobRef, { paymentStatus: newStatus });
-    };
 
     const filteredAndSortedJobs = useMemo(() => {
         let sortedJobs = [...jobs];
@@ -139,9 +70,7 @@ export default function JobsPage() {
         { key: 'customerName', label: 'Customer', sortable: true },
         { key: 'providerName', label: 'Provider', sortable: true },
         { key: 'scheduledTime', label: 'Scheduled For', sortable: true },
-        { key: 'status', label: 'Status' },
-        { key: 'cost', label: 'Cost', sortable: true },
-        { key: 'paymentStatus', label: 'Payment' },
+        { key: 'review', label: 'Review', sortable: false },
         { key: 'createdAt', label: 'Booked On', sortable: true },
         { key: 'actions', label: 'Actions' }
     ];
@@ -153,12 +82,8 @@ export default function JobsPage() {
             case 'scheduledTime':
             case 'createdAt':
                 return <span className="text-sm text-gray-600">{new Date((cellValue as any).seconds * 1000).toLocaleString()}</span>;
-            case 'status':
-                return <JobStatusBadge status={job.status} onStatusChange={(newStatus) => handleStatusChange(job.id, newStatus)} />;
-            case 'cost':
-                return <span className="text-sm text-gray-800">${(cellValue as number).toFixed(2)}</span>;
-            case 'paymentStatus':
-                return <PaymentStatusBadge status={job.paymentStatus} onStatusChange={(newStatus) => handlePaymentStatusChange(job.id, newStatus)} />;
+            case 'review':
+                return <span className="text-sm text-gray-600">{job.review || 'No review yet'}</span>;
             case 'actions':
                 return (
                     <div className="flex items-center space-x-3">
