@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect } from "react"
 import { PlusIcon, PencilIcon, TrashIcon, ChevronUpIcon, ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import { firestore } from "../../firebase/client";
-import { collection, onSnapshot, doc } from "firebase/firestore";
+import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
 
 // --- TYPES ---
 
@@ -14,7 +14,41 @@ type Job = {
     scheduledTime: any; // Firestore timestamp
     review: string;
     createdAt: any; // Firestore timestamp
+    status: 'Pending' | 'Accepted' | 'Completed' | 'Cancelled';
 };
+
+// --- HELPER COMPONENTS ---
+
+const JobStatusBadge = ({ status, onStatusChange }: { status: Job['status'], onStatusChange: (newStatus: Job['status']) => void }) => {
+    const styles = {
+        Pending: 'bg-yellow-100 text-yellow-800',
+        Accepted: 'bg-blue-100 text-blue-800',
+        Completed: 'bg-green-100 text-green-800',
+        Cancelled: 'bg-red-100 text-red-800',
+    };
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleStatusSelect = (newStatus: Job['status']) => {
+        onStatusChange(newStatus);
+        setIsOpen(false);
+    }
+
+    return (
+        <div className="relative">
+            <button onClick={() => setIsOpen(!isOpen)} className={`px-2 py-1 rounded-full text-xs font-medium ${styles[status]}`}>{status}</button>
+            {isOpen && (
+                <div className="absolute z-10 mt-2 w-32 bg-white rounded-md shadow-lg">
+                    <button onClick={() => handleStatusSelect('Pending')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pending</button>
+                    <button onClick={() => handleStatusSelect('Accepted')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Accepted</button>
+                    <button onClick={() => handleStatusSelect('Completed')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Completed</button>
+                    <button onClick={() => handleStatusSelect('Cancelled')} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cancelled</button>
+                </div>
+            )}
+        </div>
+    );
+}
+
 
 // --- MAIN PAGE COMPONENT ---
 
@@ -27,6 +61,7 @@ export default function JobsPage() {
         const unsubscribe = onSnapshot(collection(firestore, "jobs"), (snapshot) => {
             const newJobs = snapshot.docs.map(doc => ({
                 id: doc.id,
+                status: 'Pending', // Default status
                 ...doc.data()
             } as Job));
             setJobs(newJobs);
@@ -34,6 +69,11 @@ export default function JobsPage() {
 
         return () => unsubscribe();
     }, []);
+
+    const handleStatusChange = async (jobId: string, newStatus: Job['status']) => {
+        const jobRef = doc(firestore, "jobs", jobId);
+        await updateDoc(jobRef, { status: newStatus });
+    };
 
     const filteredAndSortedJobs = useMemo(() => {
         let sortedJobs = [...jobs];
@@ -69,6 +109,7 @@ export default function JobsPage() {
         { key: 'serviceName', label: 'Service', sortable: true },
         { key: 'customerName', label: 'Customer', sortable: true },
         { key: 'providerName', label: 'Provider', sortable: true },
+        { key: 'status', label: 'Status', sortable: true },
         { key: 'scheduledTime', label: 'Scheduled For', sortable: true },
         { key: 'review', label: 'Review', sortable: false },
         { key: 'createdAt', label: 'Booked On', sortable: true },
@@ -84,6 +125,8 @@ export default function JobsPage() {
                 return <span className="text-sm text-gray-600">{new Date((cellValue as any).seconds * 1000).toLocaleString()}</span>;
             case 'review':
                 return <span className="text-sm text-gray-600">{job.review || 'No review yet'}</span>;
+            case 'status':
+                return <JobStatusBadge status={job.status || 'Pending'} onStatusChange={(newStatus) => handleStatusChange(job.id, newStatus)} />;
             case 'actions':
                 return (
                     <div className="flex items-center space-x-3">

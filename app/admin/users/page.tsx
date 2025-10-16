@@ -14,6 +14,7 @@ type User = {
     status: 'Active' | 'Pending' | 'Banned';
     lastLogin: any; // Firestore timestamp
     createdAt: any; // Firestore timestamp
+    credits: number;
 };
 
 // --- HELPER COMPONENTS ---
@@ -103,6 +104,7 @@ export default function UsersPage() {
         { key: 'name', label: 'Name', sortable: true },
         { key: 'email', label: 'Email', sortable: true },
         { key: 'phone', label: 'Phone' },
+        { key: 'credits', label: 'Credits', sortable: true },
         { key: 'status', label: 'Status' },
         { key: 'lastLogin', label: 'Last Login', sortable: true },
         { key: 'createdAt', label: 'Joined', sortable: true },
@@ -167,6 +169,7 @@ export default function UsersPage() {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{user.email}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{user.phone}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{user.credits ?? 0}</td>
                                     <td className="px-6 py-4 whitespace-nowrap"><StatusBadge status={user.status} onStatusChange={(newStatus) => handleStatusChange(user.id, newStatus)} /></td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{(user.lastLogin && user.lastLogin.seconds) ? new Date(user.lastLogin.seconds * 1000).toLocaleString() : 'N/A'}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{(user.createdAt && user.createdAt.seconds) ? new Date(user.createdAt.seconds * 1000).toLocaleDateString() : 'N/A'}</td>
